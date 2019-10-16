@@ -3,8 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 import {
   HubConnectionBuilder,
-  LogLevel,
-  HttpTransportType
+  LogLevel
+  //HttpTransportType
 } from "@aspnet/signalr";
 
 const App = () => {
@@ -12,12 +12,12 @@ const App = () => {
 
   useEffect(() => {
     const options = {
-      skipNegotiation: true,
-      transport: HttpTransportType.WebSockets
+      // skipNegotiation: true,
+      // transport: HttpTransportType.WebSockets
     };
 
     const connection = new HubConnectionBuilder()
-      .withUrl("http://localhost:7000/signal", options)
+      .withUrl("https://localhost:7000/signal", options)
       .configureLogging(LogLevel.Trace)
       .build();
 
@@ -41,14 +41,9 @@ const App = () => {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={() => connection.invoke("Update", "data")}>
+          INVOKE
+        </button>
       </header>
     </div>
   );

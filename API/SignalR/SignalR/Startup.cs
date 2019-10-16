@@ -30,12 +30,13 @@ namespace SignalR
             services.AddCors(options => options.AddPolicy("CorsPolicy",
             builder =>
             {
-                builder.AllowAnyMethod().AllowAnyHeader()
-                       .WithOrigins("*")
+                builder.AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .SetIsOriginAllowed((host) => true)
                        .AllowCredentials();
             }));
 
-            services.AddSignalR();
+            services.AddSignalR(x=> x.EnableDetailedErrors = true);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
